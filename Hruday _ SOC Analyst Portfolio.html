@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hruday | SOC Analyst Portfolio</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&display=swap">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#eef3f1;--fg:#0b1512;--mut:#41564f;--acc:#008763;--red:#c62839;--card:rgba(255,255,255,.8);--line:rgba(0,0,0,.15)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#03080a;--fg:#d8f5ea;--mut:#7fa396;--acc:#1fff9c;--red:#ff3b52;--card:rgba(4,14,12,.78);--line:rgba(31,255,156,.28)}}
+:root[data-theme="dark"]{--bg:#03080a;--fg:#d8f5ea;--mut:#7fa396;--acc:#1fff9c;--red:#ff3b52;--card:rgba(4,14,12,.78);--line:rgba(31,255,156,.28)}
+*,*:before,*:after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.65 'JetBrains Mono',ui-monospace,monospace}
+canvas.l{position:fixed;inset:0;width:100%;height:100%}
+#rain{z-index:0;opacity:.35}#bg{z-index:1}
+body:after{content:'';position:fixed;inset:0;z-index:5;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.14) 0 1px,transparent 1px 3px);opacity:.5}
+main,nav,footer{position:relative;z-index:2}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:3;display:flex;justify-content:space-between;align-items:center;padding:12px 5vw;backdrop-filter:blur(8px);border-bottom:1px solid var(--line);font-size:13px;background:var(--card)}
+nav a{color:var(--fg);text-decoration:none;margin-left:16px}nav a:hover{color:var(--acc)}
+nav b{color:var(--acc)}.on{color:var(--acc)}.on:before{content:'●';margin-right:6px;animation:p 1.4s infinite}
+@keyframes p{50%{opacity:.2}}
+section{min-height:100vh;padding:90px 5vw;max-width:1000px;margin:0 auto;display:flex;flex-direction:column;justify-content:center}
+#hero{min-height:92vh}
+.tag{color:var(--red);font-size:13px;letter-spacing:.1em}
+h1{font-size:clamp(2.4rem,8vw,5rem);line-height:1.05;margin:.2em 0;font-weight:800;position:relative;display:inline-block}
+h1:before,h1:after{content:attr(data-t);position:absolute;left:0;top:0;width:100%;overflow:hidden;opacity:.7}
+h1:before{color:var(--red);animation:g1 3.5s infinite steps(1)}h1:after{color:var(--acc);animation:g2 3.5s infinite steps(1)}
+@keyframes g1{0%,92%,100%{clip-path:inset(0 0 100% 0);transform:none}93%{clip-path:inset(20% 0 55% 0);transform:translate(-4px)}96%{clip-path:inset(60% 0 10% 0);transform:translate(3px)}}
+@keyframes g2{0%,94%,100%{clip-path:inset(0 0 100% 0);transform:none}95%{clip-path:inset(45% 0 30% 0);transform:translate(4px)}98%{clip-path:inset(5% 0 75% 0);transform:translate(-3px)}}
+h2{font-size:clamp(1.4rem,4vw,2rem);margin:0 0 1em}
+h2:before{content:'root@hruday:~# ';color:var(--acc);font-size:.6em;font-weight:400}
+p{color:var(--mut);max-width:64ch}
+.term{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:16px 18px;max-width:560px;min-height:150px;margin:18px 0;box-shadow:0 0 30px -10px var(--acc);white-space:pre-wrap;font-size:13.5px}
+.term i{color:var(--acc);font-style:normal}.term u{color:var(--red);text-decoration:none}
+.btn{display:inline-block;margin:6px 12px 0 0;padding:10px 20px;border:1px solid var(--acc);color:var(--acc);text-decoration:none;font-size:13px;border-radius:3px;transition:.2s}
+.btn:hover{background:var(--acc);color:var(--bg);box-shadow:0 0 20px var(--acc)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:18px;backdrop-filter:blur(6px);transition:.25s;position:relative}
+.card:hover{transform:translateY(-4px);border-color:var(--acc);box-shadow:0 0 22px -6px var(--acc)}
+.card h3{margin:0 0 6px;font-size:1rem}.card p{margin:0;font-size:.85rem}
+.sev{position:absolute;top:12px;right:12px;font-size:10px;color:var(--red);border:1px solid var(--red);padding:0 6px;border-radius:2px}
+.chips span{display:inline-block;margin:4px 6px 4px 0;padding:4px 12px;border:1px solid var(--line);font-size:12.5px;background:var(--card);color:var(--acc)}
+.chips span:before{content:'[+] ';color:var(--red)}
+.tk{overflow:hidden;white-space:nowrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--card);font-size:12px;margin-top:30px}
+.tk div{display:inline-block;padding-left:100%;animation:m 40s linear infinite}
+@keyframes m{to{transform:translateX(-100%)}}
+.tk em{font-style:normal;color:var(--red)}.tk b{color:var(--acc);font-weight:600}
+footer{text-align:center;padding:30px;color:var(--mut);font-size:12px}
+.cur:after{content:'█';color:var(--acc);animation:b 1s steps(1) infinite}@keyframes b{50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<canvas id="rain" class="l"></canvas>
+<canvas id="bg" class="l"></canvas>
+<nav><span><b>[SOC]</b> <span class="on">SECURE SESSION</span></span><div><a href="#about">about</a><a href="#skills">skills</a><a href="#work">work</a><a href="#projects">cases</a><a href="#contact">contact</a></div></nav>
+<main>
+<section id="hero">
+  <div class="tag">// CLASSIFICATION: OPEN · THREAT LEVEL: MONITORED</div>
+  <h1 data-t="HRUDAY">HRUDAY</h1>
+  <div class="term" id="term"></div>
+  <div><a class="btn" href="#projects">&gt; open case files</a><a class="btn" href="https://linkedin.com/in/hrudaykamuni" target="_blank" rel="noopener">&gt; linkedin</a></div>
+  <div class="tk"><div id="tk"></div></div>
+  <div style="font-size:10px;color:var(--mut)">simulated alert feed, for visual effect only</div>
+</section>
+<section id="about">
+  <h2>whoami</h2>
+  <p>Cybersecurity graduate (B.Tech, Narishma Reddy Engineering College, Hyderabad, 2024) based in Bengaluru. I work as a SOC Analyst intern at World Sec Technologies (SIEMXpert), and I'm looking for entry-level roles as a SOC Analyst, Cybersecurity Analyst or in VAPT.</p>
+</section>
+<section id="skills">
+  <h2>./toolkit --list</h2>
+  <div class="chips"><span>SIEM monitoring</span><span>Log analysis</span><span>Alert triage</span><span>Incident response</span><span>Vulnerability assessment</span><span>Pentest basics</span><span>Networking</span><span>Linux</span></div>
+  <p style="margin-top:14px;font-size:.8rem">Edit to match your real tools (Splunk, Wazuh, Wireshark, Nmap, Burp Suite...).</p>
+</section>
+<section id="work">
+  <h2>cat experience.log</h2>
+  <div class="card"><span class="sev">ACTIVE</span><h3>SOC Analyst Intern</h3><p>World Sec Technologies (SIEMXpert) · Bengaluru</p></div>
+  <div class="card" style="margin-top:14px"><h3>B.Tech, Cyber Security</h3><p>Narishma Reddy Engineering College · Hyderabad · 2024</p></div>
+</section>
+<section id="projects">
+  <h2>ls ./case-files</h2>
+  <div class="grid">
+    <div class="card"><span class="sev">HIGH</span><h3>SOC Home Lab</h3><p>Placeholder: SIEM lab, log sources, custom detections.</p></div>
+    <div class="card"><span class="sev">MED</span><h3>Incident Report</h3><p>Placeholder: alert triage from detection to closure.</p></div>
+    <div class="card"><span class="sev">CRIT</span><h3>VAPT Walkthrough</h3><p>Placeholder: assessment or CTF findings.</p></div>
+  </div>
+</section>
+<section id="contact">
+  <h2>connect --secure</h2>
+  <p>Open to SOC Analyst, Cybersecurity Analyst and VAPT opportunities.</p>
+  <div><a class="btn" href="https://linkedin.com/in/hrudaykamuni" target="_blank" rel="noopener">linkedin.com/in/hrudaykamuni</a></div>
+</section>
+</main>
+<footer>© Hruday · encrypted with caffeine · three.js</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+var dark=function(){var t=document.documentElement.getAttribute('data-theme');return t?t==='dark':matchMedia('(prefers-color-scheme:dark)').matches};
+var still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+// terminal typing
+var lines=[['<i>$</i> whoami','hruday // soc analyst intern'],['<i>$</i> cat status.txt','open to entry-level SOC / VAPT roles'],['<i>$</i> ./monitor --alerts','<u>[!]</u> threats blocked. stay vigilant.']];
+var T=document.getElementById('term'),out='';
+function strip(s){return s.replace(/<[^>]+>/g,'')}
+(function run(li,ci,ph){
+  if(still){T.innerHTML=lines.map(function(l){return l[0]+'\n'+l[1]}).join('\n\n');return;}
+  if(li>=lines.length){T.innerHTML=out+'<span class="cur"></span>';return;}
+  var L=lines[li];
+  if(ph===0){var plain=strip(L[0]);if(ci<=plain.length){T.innerHTML=out+(ci>=2?'<i>$</i>'+plain.slice(1,ci):plain.slice(0,ci))+'<span class="cur"></span>';return void setTimeout(function(){run(li,ci+1,0)},45);}
+    out+=L[0]+'\n';return void setTimeout(function(){run(li,0,1)},250);}
+  out+=L[1]+'\n\n';T.innerHTML=out+'<span class="cur"></span>';setTimeout(function(){run(li+1,0,0)},400);
+})(0,0,0);
+// ticker (simulated)
+var ev=['BRUTE FORCE blocked','PORT SCAN detected','PHISHING URL quarantined','MALWARE hash flagged','SQLi attempt dropped','LOGIN anomaly escalated'];
+var h='';for(var i=0;i<14;i++){var ip=[10+(i*37)%200,(i*91)%255,(i*13)%255,1+(i*53)%250].join('.');h+='<em>[ALERT]</em> '+ev[i%6]+' <b>'+ip+'</b> &nbsp;·&nbsp; ';}
+document.getElementById('tk').innerHTML=h;
+// matrix rain
+var rc=document.getElementById('rain'),rx=rc.getContext('2d'),cols,drops,fs=15,ch='01ABCDEF<>/{}#$%'.split('');
+function rs(){rc.width=innerWidth;rc.height=innerHeight;cols=Math.ceil(rc.width/fs);drops=[];for(var i=0;i<cols;i++)drops[i]=Math.random()*-50;}
+rs();addEventListener('resize',rs);
+function rain(){rx.globalCompositeOperation='destination-out';rx.fillStyle='rgba(0,0,0,.12)';rx.fillRect(0,0,rc.width,rc.height);
+  rx.globalCompositeOperation='source-over';rx.fillStyle=dark()?'#1fff9c':'#008763';rx.font=fs+'px monospace';
+  for(var i=0;i<cols;i++){rx.fillText(ch[(Math.random()*ch.length)|0],i*fs,drops[i]*fs);if(drops[i]*fs>rc.height&&Math.random()>.975)drops[i]=0;drops[i]++;}}
+if(!still)setInterval(rain,60);
+// three.js
+if(!window.THREE)return;
+var cv=document.getElementById('bg');
+var renderer=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+var scene=new THREE.Scene(),cam=new THREE.PerspectiveCamera(60,1,.1,100);cam.position.z=14;
+var G=dark()?0x1fff9c:0x008763,R=dark()?0xff3b52:0xc62839;
+var group=new THREE.Group();scene.add(group);
+// padlock
+var lock=new THREE.Group();
+var body=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(1.8,1.4,.9)),new THREE.LineBasicMaterial({color:G}));
+var sh=new THREE.Mesh(new THREE.TorusGeometry(.6,.09,8,24,Math.PI),new THREE.MeshBasicMaterial({color:G,wireframe:true}));sh.position.y=.7;
+var fill=new THREE.Mesh(new THREE.BoxGeometry(1.7,1.3,.8),new THREE.MeshBasicMaterial({color:G,transparent:true,opacity:.12}));
+lock.add(body,sh,fill);lock.scale.setScalar(1.5);group.add(lock);
+var shield=new THREE.Mesh(new THREE.IcosahedronGeometry(4.4,1),new THREE.MeshBasicMaterial({color:G,wireframe:true,transparent:true,opacity:.14}));group.add(shield);
+var ring=new THREE.Mesh(new THREE.TorusGeometry(5.4,.02,6,80),new THREE.MeshBasicMaterial({color:G,transparent:true,opacity:.5}));ring.rotation.x=Math.PI/2.4;group.add(ring);
+// nodes + links
+var N=110,pts=[],pos=new Float32Array(N*3);
+for(var i=0;i<N;i++){var v=new THREE.Vector3(Math.random()-.5,Math.random()-.5,Math.random()-.5).normalize().multiplyScalar(7+Math.random()*6);pts.push(v);pos.set([v.x,v.y,v.z],i*3);}
+var pg=new THREE.BufferGeometry();pg.setAttribute('position',new THREE.BufferAttribute(pos,3));
+var pm=new THREE.PointsMaterial({color:G,size:.13,transparent:true,opacity:.9});group.add(new THREE.Points(pg,pm));
+var lp=[];for(var a=0;a<N;a++)for(var b=a+1;b<N;b++)if(pts[a].distanceTo(pts[b])<3.8)lp.push(pts[a].x,pts[a].y,pts[a].z,pts[b].x,pts[b].y,pts[b].z);
+var lg=new THREE.BufferGeometry();lg.setAttribute('position',new THREE.BufferAttribute(new Float32Array(lp),3));
+var lm=new THREE.LineBasicMaterial({color:G,transparent:true,opacity:.14});group.add(new THREE.LineSegments(lg,lm));
+// attack packets: red = threat (blocked at shield), green = clean traffic
+var P=45,pk=[],pp=new Float32Array(P*3),pc=new Float32Array(P*3);
+function spawn(k){k.s=pts[(Math.random()*N)|0];k.t=0;k.v=.004+Math.random()*.006;k.th=Math.random()<.55;}
+for(var i=0;i<P;i++){var k={};spawn(k);k.t=Math.random();pk.push(k);}
+var kg=new THREE.BufferGeometry();kg.setAttribute('position',new THREE.BufferAttribute(pp,3));kg.setAttribute('color',new THREE.BufferAttribute(pc,3));
+group.add(new THREE.Points(kg,new THREE.PointsMaterial({size:.3,vertexColors:true})));
+var flash=0,cg=new THREE.Color(G),cr=new THREE.Color(R),tmp=new THREE.Vector3();
+function recolor(){G=dark()?0x1fff9c:0x008763;R=dark()?0xff3b52:0xc62839;cg.setHex(G);cr.setHex(R);
+ [body.material,sh.material,fill.material,shield.material,ring.material,pm,lm].forEach(function(m){m.color.setHex(G)});}
+matchMedia('(prefers-color-scheme:dark)').addEventListener&&matchMedia('(prefers-color-scheme:dark)').addEventListener('change',recolor);
+new MutationObserver(recolor).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});recolor();
+function resize(){var w=innerWidth,h=innerHeight;renderer.setSize(w,h,false);cam.aspect=w/h;cam.position.x=w<700?0:3.5;cam.updateProjectionMatrix();}
+resize();addEventListener('resize',resize);
+var mx=0,my=0,sy=0,t=0;
+addEventListener('pointermove',function(e){mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
+addEventListener('scroll',function(){sy=scrollY/Math.max(1,document.body.scrollHeight-innerHeight)});
+function loop(){requestAnimationFrame(loop);if(!still)t+=.005;
+ lock.rotation.y=Math.sin(t*2)*.6;lock.position.y=Math.sin(t*3)*.15;
+ shield.rotation.y=-t;ring.rotation.z=t*2;
+ for(var i=0;i<P;i++){var k=pk[i];if(!still)k.t+=k.v;
+  tmp.copy(k.s).multiplyScalar(1-k.t);
+  var len=tmp.length(),blocked=k.th&&len<4.7;
+  if(blocked){flash=1;spawn(k);tmp.copy(k.s);}
+  else if(k.t>=1||len<1.5){spawn(k);tmp.copy(k.s);}
+  pp[i*3]=tmp.x;pp[i*3+1]=tmp.y;pp[i*3+2]=tmp.z;
+  var c=k.th?cr:cg;pc[i*3]=c.r;pc[i*3+1]=c.g;pc[i*3+2]=c.b;}
+ kg.attributes.position.needsUpdate=true;kg.attributes.color.needsUpdate=true;
+ flash*=.92;shield.material.opacity=.14+flash*.35;shield.material.color.copy(flash>.3?cr:cg);
+ group.rotation.y+=((t+sy*Math.PI*2+mx*.8)-group.rotation.y)*.05;
+ group.rotation.x+=((my*.6+sy*.8)-group.rotation.x)*.05;
+ cam.position.z=14-sy*3;renderer.render(scene,cam);}
+loop();
+})();
+</script>
+</body>
+</html>
